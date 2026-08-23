@@ -13,9 +13,9 @@ reranker = CrossEncoder(
     "cross-encoder/ms-marco-MiniLM-L6-v2"
 )
 
-DB_PATH = "data/user1files/documents.db"
-DATA_DIR = "data/user1files"
-PERSIST_DIRECTORY = "data/user1files/chroma"
+DB_PATH = "data/documents.db"
+DATA_DIR = "data"
+PERSIST_DIRECTORY = "data/chroma"
 COLLECTION_NAME = "rag_documents"
 TOP_K_SPARSE = 20
 TOP_K_DENSE = 20

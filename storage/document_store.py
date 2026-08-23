@@ -15,6 +15,13 @@ def get_connection():
     """)
 
     conn.execute("""
+        CREATE TABLE IF NOT EXISTS documents (
+            source TEXT PRIMARY KEY,
+            file_type TEXT
+        )
+    """)
+
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS children (
             chunk_id TEXT PRIMARY KEY,
             parent_id TEXT NOT NULL,
@@ -26,6 +33,25 @@ def get_connection():
     """)
 
     return conn
+
+def store_documents(documents):
+    conn = get_connection()
+
+    for doc in documents:
+        conn.execute(
+            """
+            INSERT OR REPLACE INTO documents
+            (source, file_type)
+            VALUES (?, ?)
+            """,
+            (
+                doc.metadata["source"],
+                doc.metadata.get("file_type"),
+            )
+        )
+
+    conn.commit()
+    conn.close()
 
 def store_parents(parents):
     conn = get_connection()
