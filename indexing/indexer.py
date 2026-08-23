@@ -8,6 +8,10 @@ from config import llm, embeddings, DATA_DIR
 def index():
     docs = load_documents(DATA_DIR)
 
+    if not docs:
+        print("No new documents to index.")
+        return
+
     store_documents(documents=docs)
 
     parents, children = chunk_documents(docs=docs)

@@ -95,6 +95,17 @@ def store_children(children):
     conn.commit()
     conn.close()
 
+def get_document_sources():
+    conn = get_connection()
+
+    rows = conn.execute(
+        "SELECT source FROM documents"
+    ).fetchall()
+
+    conn.close()
+
+    return [row[0] for row in rows]
+
 def get_parent(parent_id):
     conn = get_connection()
 

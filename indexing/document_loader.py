@@ -5,11 +5,14 @@ from langchain_community.document_loaders import (
     DirectoryLoader,
 )
 from langchain_core.documents import Document
+from storage.document_store import get_document_sources
 
 from collections import defaultdict
 
 def load_documents(DATA_DIR):
     docs = []
+
+    indexed_sources = set(get_document_sources())
 
     loaders = {
         "*.txt": (TextLoader, {"encoding": "utf-8"}),
@@ -27,6 +30,11 @@ def load_documents(DATA_DIR):
         )
 
         loaded_docs = loader.load()
+
+        loaded_docs = [
+            doc for doc in loaded_docs
+            if doc.metadata["source"] not in indexed_sources
+        ]
 
         if pattern == "*.pdf":
             pdfs = defaultdict(list)
