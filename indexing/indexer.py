@@ -1,6 +1,6 @@
-from chunking import chunk_documents
-from document_loader import load_documents
-from contextualize import contextualize
+from indexing.chunking import chunk_documents
+from indexing.document_loader import load_documents
+from indexing.contextualize import contextualize
 from storage.document_store import store_documents,store_parents,store_children
 from storage.vector_store import store_vectors
 from config import llm, embeddings, DATA_DIR

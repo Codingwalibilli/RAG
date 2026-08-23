@@ -1,8 +1,8 @@
 from config import reranker, embeddings, TOP_K_DENSE, TOP_K_SPARSE, RRF_CONSTANT, TOP_K
 from storage.vector_store import get_vectorstore
 from storage.document_store import get_children
-from hybrid_search import dense_search, build_bm25, sparse_search, reciprocal_rank_fusion
-from reranker import rerank, expand_parents
+from retrieval.hybrid_search import dense_search, build_bm25, sparse_search, reciprocal_rank_fusion
+from retrieval.reranker import rerank, expand_parents
 
 def retrieve(query):
     vectorstore = get_vectorstore(embeddings)
