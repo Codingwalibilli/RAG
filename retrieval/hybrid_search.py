@@ -1,5 +1,4 @@
 from rank_bm25 import BM25Okapi
-# Remeber in main: from config import TOP_K_DENSE, TOP_K_SPARSE, RRF_CONSTANT
 
 def dense_search(query, vectorstore, k):
     return vectorstore.similarity_search(query, k=k)
