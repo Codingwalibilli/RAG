@@ -1,5 +1,6 @@
 import json
 import sqlite3
+import tqdm
 from langchain_core.documents import Document
 from config import DB_PATH
 
@@ -37,7 +38,7 @@ def get_connection():
 def store_documents(documents):
     conn = get_connection()
 
-    for doc in documents:
+    for doc in tqdm.tqdm(documents, desc="Storing Documents"):
         conn.execute(
             """
             INSERT OR REPLACE INTO documents
@@ -56,7 +57,7 @@ def store_documents(documents):
 def store_parents(parents):
     conn = get_connection()
 
-    for parent in parents:
+    for parent in tqdm.tqdm(parents, desc="Storing parents"):
         conn.execute(
             """
             INSERT OR REPLACE INTO parents
@@ -76,7 +77,7 @@ def store_parents(parents):
 def store_children(children):
     conn = get_connection()
 
-    for child in children:
+    for child in tqdm.tqdm(children, desc="Storing children"):
         conn.execute(
             """
             INSERT OR REPLACE INTO children
